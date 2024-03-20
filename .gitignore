@@ -40,3 +40,8 @@ _minted*
 *.toc
 *.vrb
 *.xml
+
+*_data/
+.env
+ngrokrc
+

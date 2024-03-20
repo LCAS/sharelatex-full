@@ -11,15 +11,19 @@ services:
             redis:
                 condition: service_started
         ports:
-            - 8080:80
+            - 8888:80
+        dns: 
+            - 10.212.11.11
+            - 10.210.23.213
         links:
             - mongo
             - redis
         volumes:
             - sharelatex_data:/var/lib/sharelatex
+        env_file:
+            - .env
         environment:
 
-            SHARELATEX_APP_NAME: Overleaf Community Edition
 
             SHARELATEX_MONGO_URL: mongodb://mongo/sharelatex
 
@@ -34,7 +38,7 @@ services:
             ENABLE_CONVERSIONS: 'true'
 
             # Disables email confirmation requirement
-            EMAIL_CONFIRMATION_DISABLED: 'true'
+            EMAIL_CONFIRMATION_DISABLED: 'false'
 
             # temporary fix for LuaLaTex compiles
             # see https://github.com/overleaf/overleaf/issues/695
@@ -65,6 +69,13 @@ services:
         volumes:
             - redis_data:/data
 
+    ngrok:
+        image: lcas.lincoln.ac.uk/lcas/ngrok1:latest
+        volumes:
+        - ./ngrokrc:/app/.ngrok:ro
+        links:
+        - sharelatex
+
 volumes:
     sharelatex_data:
       driver: local
@@ -84,3 +95,4 @@ volumes:
         type: none
         o: bind
         device: ./redis_data
+

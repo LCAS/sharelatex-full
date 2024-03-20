@@ -1,0 +1,8 @@
+server_addr: ngrok.lcas.group:4443
+trust_host_root_certs: true
+auth_token: SECRECT
+tunnels:
+  overleaf:
+    subdomain: overleaf
+    proto:
+      https: sharelatex:80

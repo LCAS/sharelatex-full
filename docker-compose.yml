@@ -67,5 +67,20 @@ services:
 
 volumes:
     sharelatex_data:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: ./sharelatex_data
     mongo_data:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: ./mongo_data
     redis_data:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: ./redis_data

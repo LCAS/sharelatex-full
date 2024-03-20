@@ -2,7 +2,7 @@
 version: '2.2'
 services:
     sharelatex:
-        restart: always
+        restart: unless-stopped
         image: tuetenk0pp/sharelatex-full:latest
         container_name: sharelatex-full
         depends_on:
@@ -45,7 +45,7 @@ services:
             TEXMFVAR: /var/lib/sharelatex/tmp/texmf-var
 
     mongo:
-        restart: always
+        restart: unless-stopped
         image: mongo:4.4
         container_name: mongo
         expose:
@@ -61,7 +61,7 @@ services:
         command: "--replSet overleaf"
 
     redis:
-        restart: always
+        restart: unless-stopped
         image: redis:5
         container_name: redis
         expose:
@@ -70,6 +70,7 @@ services:
             - redis_data:/data
 
     ngrok:
+        restart: unless-stopped
         image: lcas.lincoln.ac.uk/lcas/ngrok1:latest
         volumes:
         - ./ngrokrc:/app/.ngrok:ro
